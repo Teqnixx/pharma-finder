@@ -20,9 +20,9 @@ $(document).ready(function () {
             "method": "GET"
         }
     
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-        });
+        // $.ajax(settings).done(function (response) {
+        //     console.log(response);
+        // });
         
         //Add your LocationIQ Maps Access Token here (not the API token!)
         locationiq.key = 'pk.a19b36c541b2259c22749dd3c4981283';
@@ -48,15 +48,42 @@ $(document).ready(function () {
 
         $.getJSON("pharmacies.json", function(json) {
             console.log(json);
-            
-            for(var i=0; i<json.length; i++) {
-                var nearest;
-                console.log(json[i][7] + ' - ' + json[i][6])
+            var pharmacies = []
 
-                if (distance(lat, long, json[i][7], json[i][6], "K") <= 0.1) {
-                    console.log(json[i][1]);
+            for(var i=0; i<json.length; i++) {
+
+                var pharmacy = {
+                    id: json[i][0],
+                    name: json[i][1],
+                    address: json[i][5]+', '+json[i][4]+', '+json[i][3]+', '+json[i][2],
+                    store: json[i][8],
+                    distance: (Math.round(distance(lat, long, json[i][7], json[i][6], "K") * 100) / 100)
                 }
+                pharmacies.push(pharmacy)
             }
+            
+            pharmacies.sort(function(a, b) {
+                return parseFloat(a.distance) - parseFloat(b.distance);
+            });
+
+            for(var i=0; i<pharmacies.length; i++) {
+                $('#pharmacy-sidebar').append(
+                    "<div class='pharmacy-card border border-dark-subtle rounded-2 d-flex justify-content-between p-3 mb-3'>" +
+                    "<div id='pharmacy-information'>" +
+                        "<h5>"+pharmacies[i].name+"</h5>" +
+                        "<p class='text-muted'>"+pharmacies[i].address+"</p>" +
+                        "<br>" +
+                        "<a href='"+pharmacies[i].store+"'>Store Link</a>" +
+                    "</div>" +
+                    "<div class='distance d-flex flex-column justify-content-center align-items-center border-start'>" +
+                        "<h2>"+pharmacies[i].distance+"</h2>" +
+                        "<h3>Km</h3>" +
+                    "</div>" +
+                    "</div>"
+                )
+            }
+
+            console.log(pharmacies)
             
             for(var i=0; i<json.length; i++) {
                 var geojson = {

@@ -1,5 +1,6 @@
 body {
     height: 100vh;
+    overflow: hidden;
 }
 
 .navbar {
@@ -30,4 +31,16 @@ body {
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.verticalLine {
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.distance {
+    width: 100px;
+}
+
+#pharmacy-information {
+    width: 180px;
 }

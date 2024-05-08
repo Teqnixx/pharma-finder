@@ -67,13 +67,28 @@ $(document).ready(function () {
             });
 
             for(var i=0; i<pharmacies.length; i++) {
-                $('#pharmacy-sidebar').append(
+                if(pharmacies[i].store != "None"){
+                    $('#pharmacy-sidebar').append(
+                        "<div class='pharmacy-card border border-dark-subtle rounded-2 d-flex justify-content-between p-3 mb-3'>" +
+                        "<div id='pharmacy-information'>" +
+                            "<h5>"+pharmacies[i].name+"</h5>" +
+                            "<p class='text-muted'>"+pharmacies[i].address+"</p>" +
+                            "<br>" +
+                            "<a href='"+pharmacies[i].store+"' target='_blank'>Store Link</a>" +
+                        "</div>" +
+                        "<div class='distance d-flex flex-column justify-content-center align-items-center border-start'>" +
+                            "<h2>"+pharmacies[i].distance+"</h2>" +
+                            "<h3>Km</h3>" +
+                        "</div>" +
+                        "</div>"
+                    )
+                }else {$('#pharmacy-sidebar').append(
                     "<div class='pharmacy-card border border-dark-subtle rounded-2 d-flex justify-content-between p-3 mb-3'>" +
                     "<div id='pharmacy-information'>" +
                         "<h5>"+pharmacies[i].name+"</h5>" +
                         "<p class='text-muted'>"+pharmacies[i].address+"</p>" +
                         "<br>" +
-                        "<a href='"+pharmacies[i].store+"'>Store Link</a>" +
+                        "<a href='#'>None</a>" +
                     "</div>" +
                     "<div class='distance d-flex flex-column justify-content-center align-items-center border-start'>" +
                         "<h2>"+pharmacies[i].distance+"</h2>" +
@@ -81,6 +96,7 @@ $(document).ready(function () {
                     "</div>" +
                     "</div>"
                 )
+                }
             }
 
             console.log(pharmacies)

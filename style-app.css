@@ -33,6 +33,15 @@ body {
     cursor: pointer;
 }
 
+#selfMarker {
+    background-color: blue;
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .verticalLine {
     border-left: 1px solid rgba(0, 0, 0, 0.3);
 }

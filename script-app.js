@@ -11,19 +11,14 @@ $(document).ready(function () {
     function successFunction(position) {
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        
+
         var settings = {
             "async": true,
             "crossDomain": true,
             "url": "https://us1.locationiq.com/v1/reverse?key=pk.a19b36c541b2259c22749dd3c4981283&lat="+lat+"&lon="+long+"&format=json&",
-            // "url": "https://us1.locationiq.com/v1/nearby?key=pk.a19b36c541b2259c22749dd3c4981283&lat="+lat+"&lon="+long+"&radius=100&format=json",
             "method": "GET"
         }
     
-        // $.ajax(settings).done(function (response) {
-        //     console.log(response);
-        // });
-        
         //Add your LocationIQ Maps Access Token here (not the API token!)
         locationiq.key = 'pk.a19b36c541b2259c22749dd3c4981283';
         //Define the map and configure the map's theme
@@ -33,7 +28,14 @@ $(document).ready(function () {
             zoom: 15,
             center: [long, lat]
         });
-        
+
+        var el = document.createElement('div');
+            el.id = 'selfMarker';
+            // finally, create the marker
+            var markerWithExternalCss = new maplibregl.Marker(el)
+                .setLngLat([long, lat])
+                .addTo(map);
+
         //Define layers you want to add to the layer controls; the first element will be the default layer
         var layerStyles = {
             "Streets": "streets/vector",

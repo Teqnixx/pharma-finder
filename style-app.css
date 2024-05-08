@@ -1,0 +1,33 @@
+body {
+    height: 100vh;
+}
+
+.navbar {
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.15);
+}
+
+.main-map {
+    height: 100%;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+}
+
+#markerWithExternalCss {
+    background-image: url(https://tiles.locationiq.com/static/images/marker50px.png);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
